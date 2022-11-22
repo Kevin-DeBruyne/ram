@@ -1,0 +1,38 @@
+static bool comp(Job i1, Job i2)
+        {
+            return (i1.profit > i2.profit);
+        }
+    vector<int> JobScheduling(Job arr[], int n) 
+    { 
+        vector <int> vec;
+        sort(arr,arr+n,comp);
+        int maxi=0;
+        for(int i=0;i<n;i++){
+            maxi=max(maxi,arr[i].dead);
+        }
+        int len=maxi+1;
+        int res[len]={0};
+        for(int i=0;i<n;i++){
+            for(int j=arr[i].dead;j>0;j--){
+                if(res[j]==0){
+                    res[j]=arr[i].profit;
+                    break;
+                }
+                else{
+                    continue;
+                }
+            }
+        }
+            int sum=0;
+            int add=0;
+        for(int i=0;i<len;i++){
+            sum+=res[i];
+            if(res[i]!=0){
+                add++;
+            }
+        }
+        vec.push_back(add);
+        vec.push_back(sum);
+    return vec;
+        
+    }
